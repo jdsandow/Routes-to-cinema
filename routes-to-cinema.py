@@ -534,6 +534,38 @@ def generate_aggregate_data(results_df, output_file='travel-to-cinema-aggregate.
         # Display sample of output data
         logger.info(f"Sample aggregate output: \n{final_agg_df.head()}")
         
+        # Example carbon factors
+        carbon_factors = {
+            'WALKING': 0,
+            'DRIVING': 170,
+            'BICYCLING': 16,
+            'BUS': 101,
+            'RAIL': 35,
+            'SUBWAY': 8,
+            'TRAM': 4,
+            'LIGHT RAIL': 4,
+            'METRO': 8,
+            'TRANSIT': 10
+        }
+
+        # Make a copy of the original dataframe
+        carbon_df = final_agg_df.drop(columns=['TOTAL'], errors='ignore').copy()
+
+        # Apply carbon factors
+        for transport in transport_types:
+            if transport in carbon_df.columns:
+                carbon_df[transport] = carbon_df[transport] * carbon_factors[transport]
+
+        # Add 'Total Carbon' column by summing across transport type columns
+        carbon_df['TOTAL CARBON'] = carbon_df[[t for t in transport_types if t in carbon_df.columns]].sum(axis=1)
+
+        # Round numeric columns to 2 decimal places
+        for col in transport_types + ['TOTAL CARBON']:
+            carbon_df[col] = carbon_df[col].round(2)
+
+        # Save the result to a CSV file
+        carbon_df.to_csv('travel-to-cinema-aggregate-carbon.csv', index=False)
+    
     except Exception as e:
         logger.error(f"Error generating aggregate data: {e}")
         raise

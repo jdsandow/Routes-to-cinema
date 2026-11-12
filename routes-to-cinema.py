@@ -4,7 +4,7 @@ import os
 import time
 import logging
 import json
-import re
+#import re
 from dotenv import load_dotenv
 
 # Set up logging
@@ -449,7 +449,7 @@ def generate_aggregate_data(results_df, output_file='travel-to-cinema-aggregate.
         # Define common transport mode types to aggregate
         transport_types = [
             'WALKING', 'DRIVING', 'BICYCLING', 'BUS', 'RAIL', 'SUBWAY', 
-            'TRAM', 'LIGHT RAIL', 'METRO', 'TRANSIT'
+            'TRAM', 'LIGHT_RAIL', 'METRO', 'TRANSIT'
         ]
         
         # Create columns for each transport type
@@ -521,6 +521,40 @@ def generate_aggregate_data(results_df, output_file='travel-to-cinema-aggregate.
         
         # Create the final aggregate DataFrame
         final_agg_df = agg_df[agg_columns].copy()
+
+        # Read carbon emissions data from CSV
+        carbon_file = 'carbon_estimations.csv'
+
+        # In this CSV each transport type has a corresponding carbon emissions factor
+        # For each transport type, we will multiply the distance by the carbon factor to estimate emissions
+        # From carbon_file, lookup transport type in column 'Method' and multiply the distance by the value in 'kg-CO2e'
+        if os.path.exists(carbon_file):
+            logger.info(f"Reading carbon emissions data from {carbon_file}")
+            carbon_df = pd.read_csv(carbon_file)
+            
+            # Create a dictionary mapping transport types to their carbon factors
+            carbon_factors = {}
+            for _, row in carbon_df.iterrows():
+                method = str(row['Method']).upper()
+                factor = row.get('kg-CO2e', 0.0)
+                try:
+                    factor = float(factor)
+                except (ValueError, TypeError):
+                    logger.warning(f"Invalid carbon factor for method '{method}': {factor}, defaulting to 0.0")
+                    factor = 0.0
+                carbon_factors[method] = factor
+            
+            # Calculate estimated carbon emissions for each transport type
+            for transport_type in transport_types:
+                if transport_type in carbon_factors:
+                    final_agg_df[f"{transport_type}_CO2e"] = final_agg_df[transport_type] * carbon_factors[transport_type]
+                else:
+                    logger.warning(f"No carbon factor found for transport type '{transport_type}', setting emissions to 0.0")
+                    final_agg_df[f"{transport_type}_CO2e"] = 0.0
+            
+            # Calculate total estimated emissions
+            co2e_columns = [f"{t}_CO2e" for t in transport_types]
+            final_agg_df['TOTAL_CO2e'] = final_agg_df[co2e_columns].sum(axis=1)
         
         # Round numeric columns to 2 decimal places
         for col in transport_types + ['TOTAL']:

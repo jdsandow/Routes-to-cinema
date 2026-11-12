@@ -19,6 +19,8 @@ RAIL (this is a catch-all for any rail transport)
 
 (I need to check exactly how various modes of rail are handled (e.g., DLR, Overground, etc).)
 
+CARBON ESTIMATION FIGURES ARE CURRENTLY DUMMY, FOR TESTING PURPOSES ONLY.
+
 Outputs:  
 A CSV file with the same structure as the input file, but with additional columns for every step of the route, the method used, and the distance.  
 A CSV file with the same structure as the input file, but with additional columns that aggregate the distance taken for each method.  

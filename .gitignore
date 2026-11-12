@@ -1,1 +1,10 @@
 .env
+.venv/
+.vscode/
+src/
+travel-to-cinema-aggregate.csv
+travel-to-cinema-results.csv
+last_api_response.json
+test_response.json
+
+test.py

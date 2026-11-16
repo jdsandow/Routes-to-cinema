@@ -3,26 +3,14 @@
 You need a Google Maps API key to run this code. Add the key to an .env file in the root directory of the project. The .env file should look like this:
 
 ```bash
-GOOGLE_MAPS_API_KEY="your_key_here"
+KEY="your_key_here"
 ```
 
-The travel-to-cinema.csv file gives the expected structure of the data, and includes sample data.
+Route travel mode
+https://developers.google.com/maps/documentation/routes/reference/rest/v2/RouteTravelMode
 
-If a route uses public transport, put "TRANSIT" in the 'Method' column. If you know what kind of public transport is used, add this into the 'Specific' column.
+Transit preferences
+https://developers.google.com/maps/documentation/routes/reference/rest/v2/TransitPreferences
 
-Allowed forms of public transport are:  
-BUS  
-SUBWAY (e.g., the London Underground)  
-TRAIN  
-LIGHT_RAIL (includes trams)  
-RAIL (this is a catch-all for any rail transport)  
-
-(I need to check exactly how various modes of rail are handled (e.g., DLR, Overground, etc).)
-
-CARBON ESTIMATION FIGURES ARE CURRENTLY DUMMY, FOR TESTING PURPOSES ONLY.
-
-Outputs:  
-A CSV file with the same structure as the input file, but with additional columns for every step of the route, the method used, and the distance.  
-A CSV file with the same structure as the input file, but with additional columns that aggregate the distance taken for each method.  
-
-Distance is in kilometers.
+Transit output types
+https://googleapis.dev/dotnet/Google.Maps.Routing.V2/latest/api/Google.Maps.Routing.V2.TransitVehicle.Types.TransitVehicleType.html

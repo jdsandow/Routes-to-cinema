@@ -1,0 +1,31 @@
+﻿Travel-method,Google-allowed,Google-output,Carbon-per-km,Region,Note1,Note2
+,TRAVEL_MODE_UNSPECIFIED,,,,RouteTravelMode,No travel mode specified. Defaults to DRIVE.
+,DRIVE,DRIVE,,,RouteTravelMode,Travel by passenger car.
+,BICYCLE,BICYCLE,,,RouteTravelMode,Travel by bicycle.
+,WALK,WALK,,,RouteTravelMode,Travel by walking.
+,TWO_WHEELER,TWO_WHEELER,,,RouteTravelMode,"Two-wheeled, motorized vehicle. For example, motorcycle. Note that this differs from the BICYCLE travel mode which covers human-powered mode."
+,TRUCK,,,,RouteTravelMode,"Truck, which might be subject to regulatory or physical restrictions. You must populate vehicle attributes in the VehicleInfo message."
+,TRANSIT,,,,RouteTravelMode,"Travel by public transit routes, where available."
+,TRANSIT_TRAVEL_MODE_UNSPECIFIED,,,,TransitPreferences,No transit travel mode specified.
+,BUS,Bus,,,TransitPreferences + TransitVehicleType,Travel by bus.
+,SUBWAY,Subway,,,TransitPreferences + TransitVehicleType,Travel by subway.
+,TRAIN,,,,TransitPreferences,Travel by train.
+,LIGHT_RAIL,,,,TransitPreferences,Travel by light rail or tram.
+,RAIL,,,,TransitPreferences,"Travel by rail. This is equivalent to a combination of SUBWAY, TRAIN, and LIGHT_RAIL"
+,,CableCar,,,TransitVehicleType,"A vehicle that operates on a cable, usually on the ground. Aerial cable cars may be of the type GONDOLA_LIFT."
+,,CommuterTrain,,,TransitVehicleType,Commuter rail.
+,,Ferry,,,TransitVehicleType,Ferry.
+,,Funicular,,,TransitVehicleType,"A vehicle that is pulled up a steep incline by a cable. A Funicular typically consists of two cars, with each car acting as a counterweight for the other."
+,,GondolaLift,,,TransitVehicleType,An aerial cable car.
+,,HeavyRail,,,TransitVehicleType,Heavy rail.
+,,HighSpeedTrain,,,TransitVehicleType,High speed train.
+,,IntercityBus,,,TransitVehicleType,Intercity bus.
+,,LongDistanceTrain,,,TransitVehicleType,Long distance train.
+,,MetroRail,,,TransitVehicleType,Light rail transit.
+,,Monorail,,,TransitVehicleType,Monorail.
+,,Other,,,TransitVehicleType,All other vehicles.
+,,Rail,,,TransitVehicleType,Rail.
+,,ShareTaxi,,,TransitVehicleType,Share taxi is a kind of bus with the ability to drop off and pick up passengers anywhere on its route.
+,,Tram,,,TransitVehicleType,Above ground light rail.
+,,Trolleybus,,,TransitVehicleType,Trolleybus.
+,,Unspecified,,,TransitVehicleType,Unused.

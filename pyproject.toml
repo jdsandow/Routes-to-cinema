@@ -1,6 +1,6 @@
 [project]
 name = "routes-to-cinema"
-version = "0.1.0"
+version = "0.2.0"
 description = "Add your description here"
 readme = "README.md"
 authors = [
@@ -8,8 +8,6 @@ authors = [
 ]
 requires-python = ">=3.12"
 dependencies = [
-    "dotenv>=0.9.9",
-    "logging>=0.4.9.6",
     "pandas>=3.1.1",
     "requests>=2.34.2",
 ]

@@ -10,7 +10,9 @@ ROUTES_URL = "https://routes.googleapis.com/directions/v2:computeRoutes"
 GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/json"
 FIELD_MASK = (
     "routes.legs.steps.distanceMeters,routes.legs.steps.travelMode,"
-    "routes.legs.steps.transitDetails.transitLine.vehicle.type"
+    "routes.legs.steps.transitDetails.transitLine.vehicle.type,"
+    "routes.legs.steps.transitDetails.transitLine.name,"
+    "routes.legs.steps.transitDetails.transitLine.nameShort"
 )
 
 
@@ -82,15 +84,15 @@ def main():
                 step_index += 1
                 step_method = step.get("travelMode", "").upper()
                 if step_method == "TRANSIT":
-                    transit_vehicle = (
-                        step.get("transitDetails", {})
-                        .get("transitLine", {})
-                        .get("vehicle", {})
-                        .get("type", "")
-                    )
+                    transit_line = step.get("transitDetails", {}).get("transitLine", {})
+                    transit_vehicle = transit_line.get("vehicle", {}).get("type", "")
                     row[f"Leg{step_index}_method"] = transit_vehicle.upper()
+                    row[f"Leg{step_index}_route"] = (
+                        transit_line.get("name") or transit_line.get("nameShort", "")
+                    )
                 else:
                     row[f"Leg{step_index}_method"] = step_method
+                    row[f"Leg{step_index}_route"] = ""
                 row[f"Leg{step_index}_distance_km"] = step.get("distanceMeters", 0) / 1000
         routes.append(row)
 

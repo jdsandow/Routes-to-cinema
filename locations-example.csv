@@ -1,0 +1,9 @@
+﻿ID,Destination1,Destination2,Travel-method
+1,w1t1ln,SE1 8XT,By bus
+2,BA2 1HL,Ba1 2sf,By bus
+3,CR0 5NS,CR0 4YA,Tram / DLR
+4,TR15 3RH,TR15 2AZ,By car (4x4)
+5,TR15 3RH,TR15 2AZ,By car (electric)
+6,TR15 3RH,TR15 2AZ,Unknown
+7,UB4 0JN,EC2Y 8DS,Tube
+8,CT9 5AD,N1C 4QP,Public transport

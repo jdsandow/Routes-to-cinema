@@ -6,6 +6,11 @@ You need a Google Maps API key to run this code. Add the key to an .env file in 
 KEY="your_key_here"
 ```
 
+## Notes
+Where you do not know the preferred method of transit, but assume it is via public transport, use "TRANSIT_TRAVEL_MODE_UNSPECIFIED".
+The Elizabeth line is classified as "Heavy_rail" by Google.
+
+### Documentation references for travel mode/preferences/types
 Route travel mode
 https://developers.google.com/maps/documentation/routes/reference/rest/v2/RouteTravelMode
 
